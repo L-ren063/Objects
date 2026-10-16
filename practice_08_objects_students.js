@@ -35,104 +35,115 @@ const movie = {
   runtime: 169,
 };
 
-// TODO 1: Print the movie title
-// console.log(...)
-
-// TODO 2: Print the director's name
-// console.log(...)
+// TODO 1: Print the title
+console.log(movie.title);
+// TODO 2: Print the director
+console.log(movie.director);
 
 // TODO 3: Print true/false — is runtime over 120?
-// console.log(...)
+if (movie.runtime > 120) {
+  console.log(true);
+} else {
+  console.log(false);
+}
 
 // TODO 4: Add a `watched` property set to true
-// movie.??? = ???
+movie.watched = true;
 
 // TODO 5: Print each key-value pair
-// console.log("Title:", ...)
-// console.log("Year:", ...)
-// console.log("Director:", ...)
-// console.log("Rating:", ...)
-// console.log("Runtime:", ...)
-// console.log("Watched:", ...)
+for (const key in movie) {
+  console.log(key + ":", movie[key]);
+}
 
-// =================================================================
-// PROBLEM 2 — Build Your Own Object
-// =================================================================
-// Write a function createStudent(name, grade, gpa) that:
-//   - Returns an object with those three properties
-//   - Also includes isHonors: true if gpa >= 3.5, false otherwise
-//
-// Expected output:
-//   createStudent("Alex", 11, 3.7)  → { name: "Alex", grade: 11, gpa: 3.7, isHonors: true }
-//   createStudent("Sam",  10, 2.9)  → { name: "Sam",  grade: 10, gpa: 2.9, isHonors: false }
+// // =================================================================
+// // PROBLEM 2 — Build Your Own Object
+// // =================================================================
+// // Write a function createStudent(name, grade, gpa) that:
+// //   - Returns an object with those three properties
+// //   - Also includes isHonors: true if gpa >= 3.5, false otherwise
+// //
+// // Expected output:
+// //   createStudent("Alex", 11, 3.7)  → { name: "Alex", grade: 11, gpa: 3.7, isHonors: true }
+// //   createStudent("Sam",  10, 2.9)  → { name: "Sam",  grade: 10, gpa: 2.9, isHonors: false }
 
 function createStudent(name, grade, gpa) {
   // TODO: return an object with name, grade, gpa, and isHonors
+  return {
+    name: name,
+    grade: grade,
+    gpa: gpa,
+    isHonors: gpa >= 3.5
+  };
 }
 
-// Test your function — uncomment when ready:
-// console.log("\n--- Problem 2 ---");
-// console.log(createStudent("Alex", 11, 3.7));
-// console.log(createStudent("Sam", 10, 2.9));
+// // Test your function — uncomment when ready:
+console.log("\n--- Problem 2 ---");
+console.log(createStudent("Alex", 11, 3.7));
+console.log(createStudent("Sam", 10, 2.9));
 
-// =================================================================
-// PROBLEM 3 — Searching an Array of Objects
-// =================================================================
-// Write a function findByName(students, targetName) that:
-//   - Uses .find() to return the student object with that name
-//   - Returns null if no match is found
-//
-// Expected output:
-//   findByName(students, "ChenZee") → { name: "ChenZee", grade: 12, gpa: 3.5, isHonors: false }
-//   findByName(students, "Marcus")  → null
+// // =================================================================
+// // PROBLEM 3 — Searching an Array of Objects
+// // =================================================================
+// // Write a function findByName(students, targetName) that:
+// //   - Uses .find() to return the student object with that name
+// //   - Returns null if no match is found
+// //
+// // Expected output:
+// //   findByName(students, "ChenZee") → { name: "ChenZee", grade: 12, gpa: 3.5, isHonors: false }
+// //   findByName(students, "Marcus")  → null
 
 function findByName(students, targetName) {
   // TODO: use .find() to search by name
   // Hint: .find() returns undefined if nothing matches — convert that to null using || (or) operator
+  return students.find(student => student.name === targetName) || null;
 }
 
-// Test your function — uncomment when ready:
-// console.log("\n--- Problem 3 ---");
-// console.log(findByName(students, "ChenZee"));
-// console.log(findByName(students, "Jane"));
-// console.log(findByName(students, "Marcus"));
+// // Test your function — uncomment when ready:
+console.log("\n--- Problem 3 ---");
+console.log(findByName(students, "ChenZee"));
+console.log(findByName(students, "Jane"));
+console.log(findByName(students, "Marcus"));
 
-// =================================================================
-// PROBLEM 4 — Roster Report
-// =================================================================
-// Write a function printRoster(students) that uses .forEach() to
-// print each student in this format:
-//
-//   [Grade 11] Jane — GPA: 3.8 ★
-//   [Grade 12] ChenZee — GPA: 3.5
-//   [Grade 10] Dakota — GPA: 3.9 ★
-//
-// The ★ appears only if isHonors is true.
-// Try solving without the honors first THEN try the star
+// // =================================================================
+// // PROBLEM 4 — Roster Report
+// // =================================================================
+// // Write a function printRoster(students) that uses .forEach() to
+// // print each student in this format:
+// //
+// //   [Grade 11] Jane — GPA: 3.8 ★
+// //   [Grade 12] ChenZee — GPA: 3.5
+// //   [Grade 10] Dakota — GPA: 3.9 ★
+// //
+// // The ★ appears only if isHonors is true.
+// // Try solving without the honors first THEN try the star
 
 function printRoster(students) {
   // TODO: loop through students with .forEach()
   // TODO: print each student in the format above
+  students.forEach(student => {
+    const honorsStar = student.isHonors ? " ★" : "";
+    console.log('[grade ' + student.grade + '] ' + student.name + ' — GPA: ' + student.gpa + honorsStar);
+  });
 }
 
-// Test your function — uncomment when ready:
-// console.log("\n--- Problem 4 ---");
-// printRoster(students);
+// // Test your function — uncomment when ready:
+console.log("\n--- Problem 4 ---");
+printRoster(students);
 
-// =================================================================
-// PROBLEM 5 — Object Inspector
-// =================================================================
-// Write a function inspectObject(obj) that uses Object.entries() to
-// print every key-value pair in this format:
-//
-//   name → Jane
-//   grade → 11
-//   gpa → 3.8
-//   isHonors → true
-//
-// It should work on ANY object — test it on the student object below
-// AND on the movie object from Problem 1.
-// Hint: Object.entries(obj).forEach(([key, value]) => { ... })
+// // =================================================================
+// // PROBLEM 5 — Object Inspector
+// // =================================================================
+// // Write a function inspectObject(obj) that uses Object.entries() to
+// // print every key-value pair in this format:
+// //
+// //   name → Jane
+// //   grade → 11
+// //   gpa → 3.8
+// //   isHonors → true
+// //
+// // It should work on ANY object — test it on the student object below
+// // AND on the movie object from Problem 1.
+// // Hint: Object.entries(obj).forEach(([key, value]) => { ... })
 
 const student = {
   name: "Jane",
@@ -143,50 +154,62 @@ const student = {
 
 function inspectObject(obj) {
   // TODO: use Object.entries() and .forEach() with destructuring
+  Object.entries(obj).forEach(([key, value]) => {
+    console.log(key + " → " + value);
+  });
 }
 
-// Test your function — uncomment when ready:
-// console.log("\n--- Problem 5: student ---");
-// inspectObject(student);
-// console.log("\n--- Problem 5: movie ---");
-// inspectObject(movie);
+// // Test your function — uncomment when ready:
+console.log("\n--- Problem 5: student ---");
+inspectObject(student);
+console.log("\n--- Problem 5: movie ---");
+inspectObject(movie);
 
-// =================================================================
-// PROBLEM 6 — Sum the Values
-// =================================================================
-// Write a function sumValues(obj) that:
-//   - Uses Object.values() to get all the values
-//   - Adds up only the values that are numbers (typeof value === "number")
-//   - Returns the total
-// I would chain forEach like the lastg problem
-//
-// Expected output:
-//   sumValues({ math: 92, english: 85, history: 78, name: "Alex" }) → 255
+// // =================================================================
+// // PROBLEM 6 — Sum the Values
+// // =================================================================
+// // Write a function sumValues(obj) that:
+// //   - Uses Object.values() to get all the values
+// //   - Adds up only the values that are numbers (typeof value === "number")
+// //   - Returns the total
+// // I would chain forEach like the lastg problem
+// //
+// // Expected output:
+// //   sumValues({ math: 92, english: 85, history: 78, name: "Alex" }) → 255
 
 function sumValues(obj) {
   // TODO: get the values with Object.values()
   // TODO: loop through them, add only numbers to a total
   // TODO: return the total
+  let total = 0;
+  Object.values(obj).forEach(value => {
+    if (typeof value === "number") {
+      total += value;
+    }
+  });
+  
+  return total;
 }
 
-// Test your function — uncomment when ready:
-// console.log("\n--- Problem 6 ---");
-// const scores = { math: 92, english: 85, history: 78, name: "Alex" };
-// console.log(sumValues(scores));  // → 255
-// console.log(sumValues(student)); // → 11 + 3.8 = 14.8  (skips strings and booleans)
+// // Test your function — uncomment when ready:
+console.log("\n--- Problem 6 ---");
+const scores = { math: 92, english: 85, history: 78, name: "Alex" };
+console.log(sumValues(scores));  // → 255
+console.log(sumValues(student)); // → 11 + 3.8 = 14.8  (skips strings and booleans)
 
-// =================================================================
-// STRETCH — Push a New Student
-// =================================================================
-// Use .push() and your createStudent() function to add a 5th student.
-// Then call printRoster() again — no changes to the function needed!
+// // =================================================================
+// // STRETCH — Push a New Student
+// // =================================================================
+// // Use .push() and your createStudent() function to add a 5th student.
+// // Then call printRoster() again — no changes to the function needed!
 
-// TODO (stretch): push a new student into the students array
-// students.push(createStudent( ??? ))
+// // TODO (stretch): push a new student into the students array
+students.push(createStudent("sam", 9, 3.2));
 
-// console.log("\n--- Stretch: Updated Roster ---");
-// printRoster(students);
+console.log("\n--- Stretch: Updated Roster ---");
+printRoster(students);
 
-// EXTRA STRETCH:
-// Rewrite printRoster() using Object.entries() so it prints every
-// property of each student dynamically — even if you add a new property later.
+// // EXTRA STRETCH:
+// // Rewrite printRoster() using Object.entries() so it prints every
+// // property of each student dynamically — even if you add a new property later.
+
